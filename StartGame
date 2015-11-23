@@ -1,0 +1,7 @@
+//Start paddle ball game
+public class StartGame {
+	public static void main(String[] args)
+	{
+		PaddleBallController game = new PaddleBallController();
+	}
+}
