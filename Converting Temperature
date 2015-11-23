@@ -1,0 +1,175 @@
+import javax.swing.*;
+
+public class TestTempConvert 
+{
+	public static void main(String[] args)
+	{
+		TempConvert app = new TempConvert();
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		app.setTitle("Temp On Demand");
+		app.setSize(300,200);
+		app.setLocationRelativeTo(null);
+		app.setVisible(true);
+		
+		
+	}	
+}
+
+
+//TempConvert.java class declareation and instantiate
+
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class TempConvert extends JFrame
+{
+	//Create components, no values assigned
+	JTextField inputField, outputField;
+	JRadioButton rCelsius1, rCelsius2, rFahrenheit1,
+				rFahrenheit2, rKelvin1, rKelvin2;
+	
+	JLabel linput, loutput, linScale, loutScale;
+	JPanel top, left, right, bottom;
+	
+	
+	TempConvert(){		//Superclass constructor 
+		super("Temperature Conversion");	
+		
+		//Call panel methods
+			buildTopPanel();
+			buildLeftPanel();
+			buildRightPanel();
+			buildBottomPanel();
+					
+	//Add panels to the Frame
+		setLayout(new BorderLayout());
+			add(top, BorderLayout.NORTH);
+			add(left, BorderLayout.WEST);
+			add(right, BorderLayout.EAST);
+			add(bottom, BorderLayout.SOUTH);
+			
+	//Create an ActionEventHandler to handle event 
+		ActionEventHandler aehdlr = new ActionEventHandler();
+		inputField.addActionListener(aehdlr);
+		
+		ItemEventHandler iehdlr = new ItemEventHandler();
+		
+		rCelsius1.addActionListener(aehdlr);		//each rButton handled by aehdlr
+		rCelsius2.addActionListener(aehdlr);
+		rFahrenheit1.addActionListener(aehdlr);
+		rFahrenheit2.addActionListener(aehdlr);
+		rKelvin1.addActionListener(aehdlr);
+		rKelvin2.addActionListener(aehdlr);
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
+		setVisible(true);		
+	}
+
+	private void buildTopPanel()
+	{
+		linput = new JLabel("Input");
+		inputField = new JTextField(6);
+		
+		top = new JPanel();
+		
+	top.add(linput);
+	top.add(inputField);
+	}
+	
+	private void buildLeftPanel()
+	{
+		
+		linScale = new JLabel("Input Scale");
+		rCelsius1 = new JRadioButton("Celsius");
+		rFahrenheit1 = new JRadioButton("Fahrenheit");
+		rKelvin1 = new JRadioButton("Kelvin");
+		
+	left = new JPanel(new GridLayout(4,1));		
+		
+	left.add(linScale);
+	left.add(rCelsius1);
+	left.add(rFahrenheit1);
+	left.add(rKelvin1);
+	
+	}
+	
+	private void buildRightPanel()
+	{
+		loutScale = new JLabel("Output Scale");
+		rCelsius2 = new JRadioButton("Celsius");
+		rFahrenheit2 = new JRadioButton("Fahrenheit");
+		rKelvin2 = new JRadioButton("Kelvin");
+		
+		right = new JPanel(new GridLayout(4,1));
+			
+		right.add(loutScale);
+		right.add(rCelsius2);
+		right.add(rFahrenheit2);
+		right.add(rKelvin2);
+	}
+	
+	private void buildBottomPanel()
+	{
+		loutput = new JLabel("Output");
+		
+	outputField = new JTextField(6);
+		
+		bottom = new JPanel();
+		
+		bottom.add(loutput);
+		bottom.add(outputField);		
+	}
+	
+	
+	protected class ActionEventHandler implements ActionListener
+	{
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			if (e.getSource() == inputField)
+			{String sNumber = inputField.getText();		//convert string input into double inputNumber
+			
+			double inputNumber = Integer.parseInt(sNumber);
+			
+			if(e.getSource() == rCelsius1 && e.getSource() == rFahrenheit2)		//pass inputNumber to calculate Temp for conversion
+				{
+				if (rCelsius1.isSelected() == true && rFahrenheit2.isSelected() == true)
+				calculateTemp(inputNumber);
+				}
+			else if(e.getSource() == rCelsius1 && e.getSource() == rKelvin2)
+			{
+				calculateTemp(inputNumber);
+			}
+			else if(e.getSource() == rFahrenheit1 && e.getSource() == rCelsius2)
+			{
+				calculateTemp(inputNumber);
+			}
+			else if(e.getSource() == rFahrenheit1 && e.getSource() == rKelvin2)
+			
+			
+			inputField.setText("");			
+			}
+			
+		}
+	}
+	
+	private class ItemEventHandler implements ItemListener
+	{
+		public void itemStateChanged(ItemEvent e)
+		{
+			
+		
+		}
+	}
+public static double calculateTemp(double num){
+	double passNum = num;
+	
+	
+	
+	return num; 
+	
+}
+}
