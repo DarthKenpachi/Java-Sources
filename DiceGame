@@ -1,0 +1,29 @@
+import javax.swing.*;
+
+public class DiceGame {
+	public static void main(String[] args){
+	String sNumRolls = JOptionPane.showInputDialog("Enter number of rolls");
+		int iNumRolls = Integer.parseInt(sNumRolls);
+		
+	int[] aDiceOne = new int[iNumRolls];		//Create both dice
+	int[] aDiceTwo = new int[iNumRolls];
+	
+	//Fill dice
+	for(int i = 0; i < aDiceOne.length; i++){
+		aDiceOne[i] = (int)(Math.random() * 6) + 1;
+		aDiceTwo[i] = (int)(Math.random() * 6) + 1;
+	}
+	
+	NumValRolled(aDiceOne, iNumRolls);
+	System.out.println("\n");
+	NumValRolled(aDiceTwo, iNumRolls);
+	}
+	
+	public static void NumValRolled(int[] array1, int rolls){
+		for (int i = 0; i < array1.length; i++){
+			 System.out.print(array1[i] +  " ");
+		
+		
+		} 
+	}
+}
