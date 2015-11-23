@@ -1,0 +1,113 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.net.*;
+import java.io.*;
+
+public class GuiPanel extends Panel implements MouseListener, MouseMotionListener
+
+{
+	int x,y,x1,y1;
+	Image img;
+	Graphics gr;
+	
+	Socket sock;
+	PrintWriter write;
+	
+	GuiPanel()
+	{
+		x = y = 0;
+		x1 = y1 = 0;
+		
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
+		
+		try{
+		
+		sock = new Socket("Localhost",41000);	//create object sock with IP @ "localhost" and port 41000
+		OutputStream os = sock.getOutputStream(); 		//sending is to sock
+		write = new PrintWriter(os, true);	
+		}catch(Exception e){}
+		
+		
+	}
+	
+	public void paint(Graphics g)
+	{
+		if(img ==null)
+		{
+			img = createImage(800,900);
+			gr = img.getGraphics();
+		}
+		gr.clearRect(0, 0, 800, 900);
+		
+		gr.setColor(Color.BLACK);
+		gr.fillOval(x, y, 300, 300);
+		
+		gr.setColor(Color.RED);
+		gr.fillOval(x1, y1, 300, 300);
+		g.drawImage(img, 0, 0, this);
+	}
+	
+	public void update(Graphics g)
+	{
+		paint(g);
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e)
+	{
+	
+		String string = "";
+		x1 = e.getX();		
+		y1 = e.getY();
+		string = "Scott:"+ x1 + "," + y1;
+		write.println(string);	
+		repaint();
+				
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e)
+	{
+		
+		x = e.getX() - 150;		//set position of mouse tip in x
+		y = e.getY() - 150;		//set position mouse tip in y
+		repaint();	
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+}
