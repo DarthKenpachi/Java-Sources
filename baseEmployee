@@ -1,0 +1,86 @@
+
+public class baseEmployee {
+	private java.util.Date dateHired;
+	private String fName = "Jane";		//Initialization of variables to default
+	private String lName = "Doe";
+	private int depNumber = 0;
+	protected double hourlyWage = 0.0;
+	protected int numberOfHours = 40;
+	
+	public java.util.Date getDateHired(){		//Attempt at a hire date method
+		return dateHired;
+	}
+	
+	public baseEmployee(){			//Construct a base employee
+		dateHired = new java.util.Date();
+	}
+	
+	//Construct a specific base employee
+	public baseEmployee(String fName, String lName, int depNumber,
+			double hourlyWage, int numberOfHours){
+		dateHired = new java.util.Date();
+		this.fName = fName;
+		this.lName = lName;
+		this.depNumber = depNumber;
+		this.hourlyWage = hourlyWage;
+		this.numberOfHours = numberOfHours;
+	}
+	
+	public String getfName() {				//Return first name
+		return fName;
+	}
+	
+	public void setfName(String fname){		//Set new first name
+		this.fName = fname;
+	}
+	
+	public String getlName(){				//Return last name
+		return lName;
+	}
+	
+	public void setlName(String lname){		//Set new last name
+		this.lName = lname;
+	}
+	
+	
+	public int getDepartmentNumber(){		//Return department number
+		return depNumber;
+	}
+	
+	public void setDepartmentNumber(int depNum){		//Set new department number
+		this.depNumber = depNum;
+	}
+	
+	
+	public double getHourlyRate(){			//Return hourly rate
+		return hourlyWage;
+	}
+	
+	public void setHourlyRate(double hourRate){		//Set hourly rate
+		this.hourlyWage = hourRate;
+	}
+
+
+	public int getHoursWorked(){			//Return hours worked
+		return numberOfHours;
+	}
+	
+	public void setHoursWorked(int shiftHours){		//Set hours worked
+		this.numberOfHours = shiftHours;
+	}
+	
+	
+	public double payCheckAmount(){		//Calculate pay, subtract any overtime
+		double pay = 0;
+		
+		if (numberOfHours > 0)
+			pay = numberOfHours * hourlyWage;
+		
+			return pay;
+	}
+
+	
+}
+	
+	
+
