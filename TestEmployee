@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class TestEmployee {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+				
+		//set and obtain variables				
+		System.out.println("Enter your first name: ");
+			String firstName = input.next();
+			
+		System.out.println("Enter your last name: ");
+			String lastName = input.next();
+			
+		System.out.println("Enter your department number 1 or 2:");
+			int departmentNumber = input.nextInt();
+			
+		System.out.println("Enter your wage per hour. Example: 8.00: ");
+			double hourlyPay = input.nextDouble();
+			
+		System.out.println("Enter the hours worked for the week: ");
+			int hoursWorked = input.nextInt();
+			
+			//Employee can be Department 1 for Commissioned Employee or Dep 2 for Union Employee
+			if (departmentNumber == 1){
+				System.out.println("You are a Commissioned Employee. " + "\nPlease enter your commission rate i.e. 0.10: ");
+					double commRate = input.nextDouble();
+				System.out.println("\nPlease enter the amount of items sold as a whole number: ");
+					int salesVolume = input.nextInt();
+					
+					//Create employeeTwo of CommissionEmployee type
+			CommissionEmployee employeeTwo = new CommissionEmployee(firstName, lastName, departmentNumber,
+					hourlyPay, hoursWorked, commRate, salesVolume);
+			
+			System.out.println("This is the pay for a Commission Employee: " + employeeTwo.reCalculatePay());
+			//Print the reCaluculatePay return value
+			}
+			else if (departmentNumber == 2){
+				System.out.println("You are a Union Employee. " + "\nPlease enter the amount of dues owed. Ex, 100: ");
+					double dDues = input.nextDouble();
+		
+					//Create employeeThree of the UnionEmployee type
+				UnionEmployee employeeThree = new UnionEmployee(firstName, lastName, departmentNumber,
+						hourlyPay, hoursWorked, dDues);
+				
+			System.out.println("This is the pay for a Union Employee: " + employeeThree.reCalculatePay());
+			}	//Print the reCalculatePay return value:  Need a SWITCH statement to handle the 3 possible outcomes
+			
+			else {
+				//Create a generic employee who is of the baseEmployee type with no modifications to payCheckAmount
+				baseEmployee employeeOne = new baseEmployee(firstName, lastName, departmentNumber,
+						hourlyPay, hoursWorked);
+				
+				System.out.println("You have been classified as a generic employee. "
+						+ "You do not receive over " + "\ntime and your pay check amount is: "
+						+ employeeOne.payCheckAmount());
+			}
+			
+	}
+
+}
