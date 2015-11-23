@@ -1,0 +1,26 @@
+import java.net.*;
+import java.io.*;
+import java.util.Scanner;
+public class MyServer
+{
+
+	public static void main(String[] args) throws Exception
+	{
+		Socket client;		//socket for client
+		ServerSocket server = new ServerSocket(41000);		//server socket object to read from port 41000
+
+		client = server.accept();
+		InputStream is = client.getInputStream();	//create input stream
+		
+		Scanner key = new Scanner(is);	//new Scanner object of input from client
+		while(true)
+		{
+			System.out.println(key.nextLine());		//read key from network
+		}
+		
+		
+		
+		
+	}
+
+}
