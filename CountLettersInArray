@@ -1,0 +1,61 @@
+
+public class CountLettersInArray {
+	
+	public static void main(String[] args){
+		//DECLARE AND CREATE AN ARRAY
+		char [] chars = createArray();
+		
+		//DISPLAY THE ARRAY
+		System.out.println("The lowercase letters are: ");
+		displayArray(chars);
+		
+		//COUNT THE OCCURENCES OF EACH LETTER
+		int[] counts = countLetters(chars);
+		
+		//DISPLAY COUNTS
+		System.out.println();
+		System.out.println("The occurences of each letter are: ");
+		displayCounts(counts);
+	}
+
+	//CREATE AN ARRAY OF CHARACTERS
+		public static char[] createArray(){
+			char [] chars = new char[100];
+			
+			for (int i = 0; i < chars.length; i++)
+				chars[i] = RandomCharacter.getRandomLowerCaseLetter();
+			
+			return chars;
+		}
+
+		
+		//DISPLAY THE ARRAY OF CHARACTERS 20 ON EACH LINE
+		public static void displayArray(char[] chars){
+			for (int i = 0; i < chars.length; i++)
+				if ((i + 1) % 20 == 0)
+					System.out.println(chars[i]);
+				else
+					System.out.println(chars[i] + " ");
+		}
+/** COUNT THE OCCURRENCES OF EACH LETTER */
+		public static int[] countLetters(char[] chars){
+			int[] counts = new int[26];
+			
+			//FOR EACH LOWERCASE LETTER IN THE ARRAY, COUNT IT
+			for (int i = 0; i < chars.length; i++)
+				counts[chars[i] - 'a']++;
+			
+			return counts;
+		}
+
+		public static void displayCounts(int[] counts){
+			for (int i = 0; i < counts.length; i++){
+				if ((i + 1) % 10 == 0)
+					System.out.println(counts[i] + " " + (char)(i + 'a'));
+				else
+					System.out.println(counts[i] + " " + (char)(i + 'a') + " ");
+			}
+		}
+}
+
+
