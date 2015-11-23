@@ -1,0 +1,93 @@
+import java.awt.*;
+import java.awt.Event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+
+import javax.swing.Timer;
+
+public class PaddleBallController implements ActionListener, MouseMotionListener 
+{
+	private final static int DIAMETER = 30; //Ball diameter
+	private final static int INCREMENT = 8; //Ball travel distance per event
+	private final static int LENGTH = 75; //Paddle length
+	
+	private PB_Ball game_ball;
+	private PB_Paddle game_paddle;
+	private PaddleBallGUI game_display;
+	
+	private Timer t;		//Timer will create events to move ball
+	
+	public PaddleBallController()
+	{
+		game_display = new PaddleBallGUI(this);		//call to invoke controller's drawGame method
+		
+		game_ball = new PB_Ball(DIAMETER, INCREMENT);		//Create ball object
+		
+		game_paddle = new PB_Paddle(LENGTH, game_display.getWidth()/2,
+				game_display.getHeight()/10);		//create new paddle with initial display area size
+		
+		t = new Timer(25, this);		//create a timer that fires every 25 milliseconds
+		
+		t.setInitialDelay(1000);		//timer wait 1 second before firing the first time
+		
+		t.start();		//start timer 
+		
+		game_display.addMouseMotionListener(this);		//initialize the mouse event handler		
+	}
+	
+	public void drawGame(Graphics g)
+	{
+		if(game_ball != null)
+			game_ball.drawBall(g);
+		if(game_paddle != null)
+			game_paddle.drawPaddle(g);
+	}
+	
+	public void mouseDragged(MouseEvent me)
+	{
+		int x, y;
+		//Get cursor position
+		x = me.getX();
+		y = me.getY();
+		
+		//Update pos of paddle and redraw GUI
+		game_paddle.updatePos(x, y);
+		game_display.repaint();
+	}
+	
+	public void mouseMoved(MouseEvent me)
+	{
+		int x, y;
+		
+		x = me.getX();
+		y = me.getY();
+		game_paddle.updatePos(x, y);
+		game_display.repaint();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		//Ball moves within size of display area
+		game_ball.updatePos(game_display.getWidth(), game_display.getHeight());
+		
+		//check if ball is in contact with paddle
+		int btop = game_ball.getTop();
+		int pbottom = game_paddle.getBottom();
+		
+		if (btop <= pbottom && btop >= pbottom - INCREMENT)
+		{
+			//is center of ball within left and right edge of paddle?
+			int bcenter = game_ball.getHorizontalCenter();
+			if(bcenter >= game_paddle.getLeft() && bcenter <= game_paddle.getRight())
+			{
+				//reverse vert travel direction of ball
+				game_ball.reverseVerticalDirection();
+			}
+		}
+		game_display.repaint();   	//redraw GUI
+	}
+	
+}
