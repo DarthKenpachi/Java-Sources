@@ -1,0 +1,18 @@
+import java.util.Random;
+
+public class RandomNum
+{
+	public static void main(String[] chun)
+	{
+		Random num = new Random();	//object random number
+		
+		int value;	//integer to hold and display random num
+		
+		for (int i = 1; i <= 10; i++)	//create 10 random numbers
+		{
+			value = num.nextInt(50);		//random numbers from 1-50
+			System.out.println(value + " ");
+		}	//for loop to generate random num and display w/ Sys.out
+	}
+
+}
