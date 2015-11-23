@@ -1,0 +1,80 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class SecondGUI extends JFrame
+{
+	JPanel left, right;
+	JCheckBox top, middle, bottom;
+	JRadioButton first, second, third;
+	JTextArea textArea;
+	JScrollPane scroller;
+	ButtonGroup bgroup;
+	
+	SecondGUI()
+	{
+		buildLeft();
+		buildCenter();
+		buildRight();
+		// We have things we want horizontally arranged, so lets use FlowLayout
+		setLayout(new FlowLayout());
+		// Add the panels and the scroller to the JFrame
+		add(left);
+		add(scroller);
+		add(right);
+	}
+
+	private void buildLeft()
+	{
+		// A GridLayout can have any number of rows and columns (rows, columns)
+		// One component can be added to each cell of the grid
+		// Cells are filled one row at a time, starting with the left most cell
+		// Radiobuttons and Checkboxes maintain their size within a grid cell
+		left = new JPanel(new GridLayout(3,1));
+		// Create the check boxes with labels - all in the unchecked state
+		top = new JCheckBox("First Check Box", false);
+		middle = new JCheckBox("Second Check Box", false);
+		bottom = new JCheckBox("Third Check Box", false);
+		// Add the check boxes to the left panel - vertically organized
+		left.add(top);
+		left.add(middle);
+		left.add(bottom);
+	}
+	
+	private void buildRight()
+	{
+		right = new JPanel(new GridLayout(3,1));
+		// Create the radio buttons with labels - all in the unselected state
+		first = new JRadioButton("First Radio Button", false);
+		second = new JRadioButton("Second Radio Button", false);
+		third = new JRadioButton("Third Radio Button", false);
+		// Add the radio buttons to the right panel - vertically organized
+		right.add(first);
+		right.add(second);
+		right.add(third);
+		// Create a button group and add the radio buttons to it
+		// This assures that only one button will be selected at any time
+		bgroup = new ButtonGroup();
+		bgroup.add(first);
+		bgroup.add(second);
+		bgroup.add(third);
+	}
+	
+	private void buildCenter()
+	{
+		// Set up a text area with 10 rows and 20 columns
+		textArea = new JTextArea(10, 20);
+		// Place the text area into a scroll pane so scroll bars will appear when needed
+		scroller = new JScrollPane(textArea);
+	}
+	
+	public static void main(String[] args) 
+	{
+		// Create an instance of this class - cause the constructor to run
+		SecondGUI app = new SecondGUI();
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// Size the window to hold the components that have been added
+		app.pack();
+		// Don't forget to set visible, or you won't be able to see your window!
+		app.setVisible(true);
+	}
+}
