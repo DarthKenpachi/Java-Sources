@@ -1,0 +1,37 @@
+
+public class UnionEmployee extends baseEmployee {
+	private double dDues;
+	
+	
+	public UnionEmployee(){}		//Constructor
+	
+	public UnionEmployee(String fName, String lName, int depNumber,
+			double hourlyWage, int numberOfHours, double dDues){		//Contructor of specific type
+		
+		this.dDues = dDues;		//New declare for parameter dDues
+		
+		setfName(fName);		//Invoke methods from superclass to create objects 
+		setlName(lName);
+		setDepartmentNumber(depNumber);
+		setHourlyRate(hourlyWage);
+		setHoursWorked(numberOfHours);
+	}
+	
+	public double reCalculatePay(){			//Modify payCheckAmount
+		
+		System.out.println("The amount of dues to be taken from your check is " +
+				dDues + "!");
+		double myPayCheck = 0.0;
+		
+		//NEED TO REPLACE WITH A SWITCH STATEMENT TO BREAK AND RETURN CORRECT VALUE
+		if (numberOfHours < 40 && numberOfHours > 0){
+			myPayCheck = super.payCheckAmount() + (hourlyWage * numberOfHours) - dDues;
+		}
+		
+		else if (numberOfHours == 40){
+			myPayCheck = super.payCheckAmount() + (hourlyWage * numberOfHours) - dDues;
+		}
+		
+		return myPayCheck;	
+	}
+}
