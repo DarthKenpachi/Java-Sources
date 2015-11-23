@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class CalculateNumbers {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+Scanner input = new Scanner(System.in);
+
+
+//COLLECT USER INPUT AND STORE IN NUM VARIABLES
+
+System.out.println("Enter the first digit: ");
+	int num1 = input.nextInt();
+	
+System.out.println("Enter the second digit: ");
+	int num2 = input.nextInt();
+	
+System.out.println("Enter the thrid digit: ");
+	int num3 = input.nextInt();
+	
+int sum = num1 + num2 + num3;
+int product = num1 *  num2 * num3;
+double average = (product / 3.00);
+
+//OUTPUT SUM, PRODUCT, AND AVERAGE OF 3 INTEGERS
+
+System.out.println("The sum of all 3 digits is: " + sum);
+System.out.println("The product of all 3 digits is: " + product);
+System.out.println("The average of all 3 digits is: " + average);
+
+int largest = number(num1, num2, num3);
+System.out.println("The largest number is " + largest);
+
+int smallest = smallestNumber(num1, num2, num3);
+System.out.println("The smallest number is " + smallest);
+
+	}
+
+//CHECK TO FIND THE LARGEST INTEGER 
+
+public static int number(int i1, int i2, int i3) {
+	int largestNumber = 0;
+	
+	if (i1 > i2 && i1 > i3)
+		largestNumber = i1;
+	
+	else if (i2 > i1 && i2 > i3)
+		largestNumber = i2;
+	
+	else if (i3 > i1 && i3 > i2)
+		largestNumber = i3;
+	
+	return largestNumber;
+	}
+
+public static int smallestNumber(int i1, int i2, int i3) {
+	int smallestNumber = 0;
+	
+	if (i1 < i2 && i1 < i3)
+		smallestNumber = i1;
+	
+	else if (i2 < i1 && i2 < i3)
+		smallestNumber = i2;
+	
+	else if (i3 < i1 && i3 < i2)
+		smallestNumber = i3;
+	
+	return smallestNumber;
+	}
+}
+
+
