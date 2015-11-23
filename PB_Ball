@@ -1,0 +1,84 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class PB_Ball
+{
+	int x, y;		//position of upper left corner of containing box
+	int xincrement;		//Amount to move left or right
+	int yincrement;		//Amount to move up or down
+	int size;		//Diameter of ball
+	
+	public PB_Ball (int diameter, int distance)
+	{
+		size = diameter;
+		xincrement = yincrement = distance;
+		x = y = 10;		//beginning ball position
+	}
+	
+	public void updatePos(int width, int height)
+	{
+		//Add increment to current position
+		x += xincrement;
+		y += yincrement;
+		//Check to see if ball hit the wall
+		//reverse the sign of the increment if ball has hit the wall
+		
+		if ((x <= -3) || (x + size >= height + 3))
+			xincrement = -xincrement;
+		if ((y <= -3) || (y + size >= height + 3))
+			yincrement = -yincrement;
+	}
+	
+	public void reverseHorizontalDirection()
+	{
+		xincrement = -xincrement;
+	}
+	
+	public void reverseVerticalDirection()
+	{
+		yincrement = -yincrement;
+	}
+	
+	public int getTop()
+	{
+		return y;
+		//return position of top of ball
+	}
+	
+	public int getBottom()
+	{
+		return y + size;
+		//return position of bottom of ball
+	}
+	
+	public int getLeft()
+	{
+		return x;
+		//return position of left edge of ball
+	}
+	
+	public int getRight()
+	{
+		return x + size;
+		//return position of right edge of ball
+	}
+	
+	public int getHorizontalCenter()
+	{
+		return x + size/2;
+		//return hor center of ball
+	}
+	
+	public int getVerticalCenter()
+	{
+		return y + size/2;
+		//return vert center of ball
+	}
+	
+	public void drawBall(Graphics g)
+	{
+		g.setColor(Color.green);
+		g.fillOval(xincrement, y, size, size);
+	}
+}
