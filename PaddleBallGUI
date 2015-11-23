@@ -1,0 +1,30 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class PaddleBallGUI extends JPanel {
+	PaddleBallController controller;
+	JFrame frame;
+	
+	PaddleBallGUI(PaddleBallController pc)
+	{
+		//Store game controller
+		controller = pc;
+		
+		//Create frame and add panel into it
+		frame = new JFrame();
+		frame.add(this);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(600, 600);
+		frame.setVisible(true);
+	}
+	
+	public void paintComponent(Graphics g)
+	{
+	//call paintComponent to erase display area
+		g.setColor(Color.cyan);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		//Update display with game controller
+		controller.drawGame(g);
+	}
+}
