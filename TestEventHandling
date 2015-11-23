@@ -1,0 +1,195 @@
+
+
+/**
+*CREATED BY TAI SCOTT
+*PLEASE GIVE CREDIT FOR WORK CITED
+*
+*
+*/
+
+
+
+
+import javax.swing.*;
+
+public class TestEventHandling 
+{
+	public static void main(String[] args) 
+	{
+		EventHandlerDemo app = new EventHandlerDemo();
+	}
+}
+
+
+
+
+
+
+
+//EventHandlerDemo.class
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+// This class demonstrates handling ActionEvents from JButtons and TextFields.
+// It also demonstrates handling ItemEvents from RadioButtons and CheckBoxes.
+// The ActionListener interface and the ItemListener interface are implemented
+// by two different inner classes.
+
+
+public class EventHandlerDemo extends JFrame
+{
+	JButton button1, button2;
+	JRadioButton rbutton;
+	JCheckBox cbox;
+	JTextField textfield;
+	JLabel lcenter, lbottom;
+	JTextArea area;
+	JScrollPane scroller;
+	JPanel top, center, bottom;
+
+	EventHandlerDemo()
+	{
+		super("Event Handling Demo");
+		// Build the three panels for the GUI
+		buildTopPanel();
+		buildCenterPanel();
+		buildBottomPanel();
+		// Add the panels to the frame - JFrames have a BorderLayout by default
+		add(top, BorderLayout.NORTH);
+		add(center, BorderLayout.CENTER);
+		add(bottom, BorderLayout.SOUTH);
+		// Set up event handling for the JButtons and the JTextField
+		// Create an ActionEventHandler object as the event handler
+		// and register it with the JButtons and JTextField
+		ActionEventHandler aehdlr = new ActionEventHandler();
+		button1.addActionListener(aehdlr);
+		button2.addActionListener(aehdlr);
+		textfield.addActionListener(aehdlr);
+		// Set up event handling for the JRadioButton and the JCheckBox
+		// Create an ItemEventHandler object as the event handler and
+		// register it with the JRadioButton and JCheckBox
+		ItemEventHandler iehdlr = new ItemEventHandler();
+		rbutton.addItemListener(iehdlr);
+		cbox.addItemListener(iehdlr);		
+		// Finish setting up the frame and make it visible
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// Pack will make the display area as small as possible
+		// based on the size of the components we added to the frame
+		pack();
+		setVisible(true);
+	}
+	
+	private void buildTopPanel()
+	{
+		// Create two JButtons, a JRadioButton, and a JCheckBox for the top panel
+		// JPanels have FlowLayout which arranges things left to right, top to bottom
+		button1 = new JButton("I'm Button 1");
+		button2 = new JButton("I'm Button 2");
+		rbutton = new JRadioButton("I'm a RadioButton");
+		cbox = new JCheckBox("I'm a CheckBox");
+		// Create the JPanel and add the buttons to the panel
+		top = new JPanel();
+		top.add(button1);
+		top.add(button2);
+		top.add(rbutton);
+		top.add(cbox);		
+	}
+	
+	private void buildCenterPanel()
+	{
+		// Create a JLabel and a JTextField for the center panel
+		lcenter = new JLabel("Enter some text then press enter!");
+		// Setup the JTextField for 10 characters
+		textfield = new JTextField(10);
+		// Create the JPanel and add the components to it
+		center = new JPanel();
+		center.add(lcenter);
+		center.add(textfield);		
+	}
+	
+	private void buildBottomPanel()
+	{
+		// Create a JLabel and a scrollable JTextArea for the bottom panel
+		lbottom = new JLabel("Event Report");
+		// JTextArea will show 4 lines of text, 20 columns wide
+		area = new JTextArea(4, 20);
+		// Don't allow the user to enter text into the JTextArea
+		area.setEditable(false);
+		// Place JTextArea in a JScrollPane so we can scroll thru all text in the text area
+		scroller = new JScrollPane(area);
+		// Create the JPanel and add components to it
+		bottom = new JPanel();
+		bottom.add(lbottom);
+		// Add the JScrollPane to the panel... don't add the JTextArea to the panel
+		bottom.add(scroller);
+	}
+	// Nested inner class to handle ActionEvents from JButtons and the JTextField
+	private class ActionEventHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			// Use the getSource() method to determine which object caused the event
+			if (e.getSource() == button1)
+			{
+				// Report that Button 1 was clicked
+				area.setText("Button 1 clicked\n");
+				// Use the getActionCommand() method to display the button's text
+				area.append("GetActionCommand: " + e.getActionCommand() + "\n");
+			}
+			else if (e.getSource() == button2)
+			{
+				// Report that Button 2 was clicked
+				area.setText("Button 2 clicked\n");
+				// Use the component's getText() method to display the button's text
+				area.append("GetText: " + button2.getText());			
+			}
+			else if (e.getSource() == textfield)
+			{
+				// Report that the enter key was typed in the text field
+				area.setText("Enter key typed in the text field\n");	
+				// Use the component's getText() method to display the text field's text
+				area.append("GetText: " + textfield.getText());	
+				// Now clear the text field
+				textfield.setText("");
+			}
+		}
+	}
+	// Nested inner class to handle ItemEvents from JRadioButtons and JCheckBoxes
+	private class ItemEventHandler implements ItemListener
+	{
+		public void itemStateChanged(ItemEvent e)
+		{
+			String action;
+			// Determine which button was the source of this event
+			// Then check the state of that button object
+			if (e.getSource() == rbutton)
+			{
+				action = "RadioButton was clicked!\n";
+				// Find out if the button is selected or not
+				if(rbutton.isSelected())
+				{
+					action += "RadioButton is turned on!\n";
+				}
+				else
+				{
+					action += "RadioButton is turned off!\n";
+				}
+			}
+			else
+			{
+				action = "CheckBox was clicked!\n";
+				if(cbox.isSelected())
+				{
+					action += "CheckBox is turned on!\n";
+				}
+				else
+				{
+					action += "CheckBox is turned off!\n";
+				}
+			}
+			// Display the string in the JTextArea
+			area.setText(action);
+		}
+	}
+}
