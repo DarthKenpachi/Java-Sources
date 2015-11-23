@@ -1,0 +1,22 @@
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+
+public class DiceRollGame {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		final int SIDES_OF_DICE = 6;
+		
+		//GET NUMBER OF ROLLS AND CONVERT TO INTEGER
+String numberOfRollString = JOptionPane.showInputDialog(
+		"Enter the number of rolls for the game.");
+int numberOfRolls = Integer.parseInt(numberOfRollString);
+
+int[] diceOne = new int [SIDES_OF_DICE];
+int[] diceTwo = new int [SIDES_OF_DICE];	  //CREATE ARRAY FOR DICE	
+
+
+
+	}
+}
