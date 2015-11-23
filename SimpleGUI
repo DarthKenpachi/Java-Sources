@@ -1,0 +1,141 @@
+import javax.swing.*;
+import java.awt.*;
+
+// This application inherits from the JFrame class and uses different layout managers
+// to control the layouts of different panels of the GUI. The top level container is
+// a JFrame which has a BorderLayout by default. This application creates four different
+// JPanels, each with its own layout manager to manage the GUI components that will 
+// appear at the top and bottom of the display, and to the right and left of the display.
+// The top and bottom panels will use FlowLayouts to manage horizontal components.
+// The left panel uses a GridLayout and the right panel uses a BoxLayout
+// to manage vertical components.
+
+public class SimpleGUI extends JFrame
+{
+	JPanel left, right, top, bottom;
+	JButton one, two, three, four;
+	JLabel lone, ltwo, lthree, lfour, tlabel, blabel;
+	JTextField tfone, tftwo;
+	
+	SimpleGUI( )
+	{
+		// Build four panels using different layouts and different alignments
+		buildLeftPanel();
+		buildRightPanel();
+		buildTopPanel();
+		buildBottomPanel();
+		// JFrame has BorderLayout by default, so put one panel in each area
+		add(left, BorderLayout.WEST);
+		add(right, BorderLayout.EAST);
+		add(top, BorderLayout.NORTH);
+		add(bottom, BorderLayout.SOUTH);
+	}
+	
+	private void buildLeftPanel()
+	{
+		// Create a dimension object to set the preferred size of the components
+		Dimension dim = new Dimension(80, 25);
+		// Label text is left justified by default, so lets center it
+		lone = new JLabel("ONE", JLabel.CENTER);
+		// Set the preferred size for all components to the same size
+		// GridLayout uses this information, but does not always follow it
+		lone.setPreferredSize(dim);
+		// Button text is centered by default
+		one = new JButton("ONE");
+		one.setPreferredSize(dim);	
+		// Create the second centered label
+		ltwo = new JLabel("TWO", JLabel.CENTER);
+		ltwo.setPreferredSize(dim);
+		// Create the second button
+		two = new JButton("TWO");
+		two.setPreferredSize(dim);
+		// Create the left panel, set the layout, and add components to the panel
+		left = new JPanel();
+		// Create a GridLayout for a column of 4 vertical components
+		// Specify 5 pixels for horizontal and vertical spacing
+		left.setLayout(new GridLayout(4,1,5,5));		
+		left.add(lone);
+		left.add(one);
+		left.add(ltwo);
+		left.add(two);
+	}
+	
+	private void buildRightPanel()
+	{
+		// Create a dimension object to set the size of the components
+		Dimension dim = new Dimension(80,25);
+		// Create a label with text centered within the label area
+		lthree = new JLabel("THREE", JLabel.CENTER);
+		// Set the preferred, minimum, and maximum size so
+		// the layout manager is constrained to this size
+		lthree.setPreferredSize(dim);
+		lthree.setMinimumSize(dim);
+		lthree.setMaximumSize(dim);
+		// Set the alignment of the label area to centered
+		lthree.setAlignmentX(Component.CENTER_ALIGNMENT);
+		// Set up the other components with the same size and alignment
+		three = new JButton("THREE");
+		three.setPreferredSize(dim);
+		three.setMinimumSize(dim);
+		three.setMaximumSize(dim);
+		three.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		lfour = new JLabel("FOUR", JLabel.CENTER);	
+		lfour.setPreferredSize(dim);
+		lfour.setMinimumSize(dim);
+		lfour.setMaximumSize(dim);
+		lfour.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		four = new JButton("FOUR");
+		four.setPreferredSize(dim);
+		four.setMinimumSize(dim);
+		four.setMaximumSize(dim);
+		four.setAlignmentX(Component.CENTER_ALIGNMENT);
+		// Create the panel with a vertical BoxLayout
+		right = new JPanel();
+		right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
+		// Add the components to the panel
+		right.add(lthree);
+		right.add(three);
+		right.add(lfour);
+		right.add(four);
+	}
+	
+	private void buildTopPanel()
+	{
+		top = new JPanel();
+		// Use the default FlowLayout of the JPanel for a row of components
+		// Setup the FlowLayout of the JPanel to shift everything to the left side
+		FlowLayout lm = (FlowLayout)top.getLayout();
+		lm.setAlignment(FlowLayout.LEFT);
+		tlabel = new JLabel("LEFT ALIGN");
+		// Create a text field which will hold 10 characters
+		tfone = new JTextField(10);
+		top.add(tlabel);
+		top.add(tfone);
+	}
+	
+	private void buildBottomPanel()
+	{
+		bottom = new JPanel();
+		// Same setup as for the top panel, except we shift everything to the right
+		FlowLayout lm = (FlowLayout)bottom.getLayout();
+		lm.setAlignment(FlowLayout.RIGHT);
+		blabel = new JLabel("RIGHT ALIGN");
+		tftwo = new JTextField(10);
+		bottom.add(blabel);
+		bottom.add(tftwo);
+	}
+	
+	public static void main(String[] args) 
+	{
+		// Create an object of our SimpleGUI class
+		SimpleGUI app = new SimpleGUI();
+		// Close the application when the window is closed
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// Set the size in pixels of the window... width, height
+		app.setSize(300,200);
+		// Make the window visible!
+		app.setVisible(true);
+	}
+}
