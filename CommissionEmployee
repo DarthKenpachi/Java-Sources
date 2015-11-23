@@ -1,0 +1,24 @@
+
+public class CommissionEmployee extends baseEmployee{
+	private double commRate;		//Specific class variables
+	private int salesAmount;
+	
+	public CommissionEmployee(){}		//Constructor
+	
+	public CommissionEmployee(String fName, String lName, int depNumber,
+			double hourlyWage, int numberOfHours, double commRate, int salesAmount){		//Create Object
+		this.commRate = commRate;
+		this.salesAmount = salesAmount;		//Initialize class variables with parameters passed
+		
+		setfName(fName);
+		setlName(lName);
+		setDepartmentNumber(depNumber);
+		setHourlyRate(hourlyWage);
+		setHoursWorked(numberOfHours);	
+	}
+	
+	public double reCalculatePay(){		//Modify payCheckAmount
+		return super.payCheckAmount() + (commRate * salesAmount) + (hourlyWage * numberOfHours);
+	}
+	
+}
