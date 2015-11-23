@@ -1,0 +1,54 @@
+import java.awt.*;
+
+public class PB_Paddle
+{
+	private static final int WIDTH = 5;		//width of paddle
+	
+	private int length;		//length of paddle
+	private int xpos, ypos;		//if hor, position of center of the top paddle surface
+								//if vert, position of center of the left paddle surface
+	
+		public PB_Paddle(int l, int x, int y)
+		{
+			length = l;
+			xpos = x;
+			ypos = y;
+		}
+		
+		public void updatePos(int x, int y)
+		{
+			//Can only move left and right
+			xpos = x;
+		}
+		
+		public int getLeft()
+		{
+			//Return left surface position of paddle
+			return xpos - length / 2;
+		}
+		
+		public int getRight()
+		{
+			//Return right surface position of paddle
+			return xpos + length / 2;
+		}
+		
+		public int getTop()
+		{
+			//return top surface position of paddle
+			return ypos;
+		}
+		
+		public int getBottom()
+		{
+			//return bottom surface position of paddle
+			return ypos + WIDTH;
+		}
+		
+		public void drawPaddle(Graphics g)
+		{
+			//The mouse cursor represents center of paddle
+			g.setColor(Color.red);
+			g.fillRect(xpos - length / 2, ypos, length, WIDTH);
+		}
+}
