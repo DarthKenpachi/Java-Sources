@@ -1,0 +1,73 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class AlignGrid extends JFrame
+{
+	//create components
+	JPanel left, center, right;
+	JCheckBox top, bottom;
+	JButton first, second, third;
+	JLabel one, two;
+	JTextField tfone, tftwo;
+	
+	
+	AlignGrid()
+	{
+		//call panel methods
+		buildLeft();
+		buildCenter();
+		buildRight();
+		
+		//add panels to the frame
+		setLayout(new FlowLayout());
+			add(left);
+			add(center);
+			add(right);
+	}
+	
+	private void buildLeft()
+	{
+		left = new JPanel(new GridLayout (2, 1));
+		top = new JCheckBox("Snap to Grid", false);
+		bottom = new JCheckBox("Show Grid", false);
+		
+		left.add(top);
+		left.add(bottom);	
+	}
+	
+	private void buildRight()
+	{
+		right = new JPanel(new GridLayout(3, 1));
+		
+		first = new JButton("OK");
+		second = new JButton("Cancel");
+		third = new JButton("Help");
+		
+		right.add(first);
+		right.add(second);
+		right.add(third);
+	}
+	private void buildCenter()
+	{
+		center = new JPanel(new GridLayout(2,1));
+		
+		one = new JLabel("x");
+		tfone = new JTextField(3);
+		two = new JLabel("y");
+		tftwo = new JTextField(3);
+		
+		center.add(one);
+		center.add(tfone);
+		center.add(two);
+		center.add(tftwo);
+	}
+	
+	public static void main(String[] args)
+	{
+		AlignGrid app = new AlignGrid();
+			app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			app.setTitle("Align");
+			app.pack();
+			app.setVisible(true);
+	}
+}
